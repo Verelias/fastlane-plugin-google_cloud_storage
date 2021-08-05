@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 require 'google/cloud/storage'
 
 module Fastlane
   module Actions
+    # Google cloud storage check file action.
+    # This verifies if a specific file exists in the specified bucket
+    # it returns true if the file exists, false if it does not.
     class GoogleCloudStorageCheckFileAction < Action
       def self.run(params)
         Actions.verify_gem!('google-cloud-storage')
@@ -22,7 +27,7 @@ module Fastlane
             file_name: params[:file_name]
           )
           true
-        rescue
+        rescue StandardError
           false
         end
       end
@@ -42,38 +47,40 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :project,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_PROJECT",
-                               description: "Google Cloud Storage project identifier",
-                                  optional: false,
-                                      type: String),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_PROJECT",
+                                       description: "Google Cloud Storage project identifier",
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :keyfile,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_KEYFILE",
-                               description: "Google Cloud Storage keyfile",
-                                  optional: false,
-                                      type: String,
-                              verify_block: proc do |value|
-                                              if value.nil? || value.empty?
-                                                UI.user_error!("No keyfile for Google Cloud Storage action given, pass using `keyfile_path: 'path/to/file.txt'`")
-                                              elsif File.file?(value) == false
-                                                UI.user_error!("Keyfile '#{value}' not found")
-                                              end
-                                            end),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_KEYFILE",
+                                       description: "Google Cloud Storage keyfile",
+                                       optional: false,
+                                       type: String,
+                                       verify_block: proc do |value|
+                                         if value.nil? || value.empty?
+                                           UI.user_error!("No keyfile for Google Cloud Storage action
+                                                                        given, pass using `keyfile_path:
+                                                                        'path/to/file.txt'`")
+                                         elsif !File.file?(value)
+                                           UI.user_error!("Keyfile '#{value}' not found")
+                                         end
+                                       end),
           FastlaneCore::ConfigItem.new(key: :bucket,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_BUCKET",
-                               description: "Google Cloud Storage bucket",
-                                  optional: false,
-                                      type: String),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_BUCKET",
+                                       description: "Google Cloud Storage bucket",
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :file_name,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_DOWNLOAD_FILE_NAME",
-                               description: "File name",
-                                  optional: false,
-                                      type: String)
+                                       env_name: "GOOGLE_CLOUD_STORAGE_DOWNLOAD_FILE_NAME",
+                                       description: "File name",
+                                       optional: false,
+                                       type: String)
         ]
       end
 
-      def self.is_supported?(platform)
-        true
-      end
+      # def self.supported?(platform)
+      #   true
+      # end
     end
   end
 end

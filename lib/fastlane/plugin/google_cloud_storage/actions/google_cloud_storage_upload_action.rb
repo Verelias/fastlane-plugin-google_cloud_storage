@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 require 'google/cloud/storage'
 
 module Fastlane
   module Actions
+    # Google Cloud Storage upload action
+    # This uploads the specified file to the specified
+    # Google Cloud Storage bucket under the specified filePath.
     class GoogleCloudStorageUploadAction < Action
       def self.run(params)
         Actions.verify_gem!('google-cloud-storage')
@@ -31,50 +36,54 @@ module Fastlane
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :project,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_PROJECT",
-                               description: "Google Cloud Storage project identifier",
-                                  optional: false,
-                                      type: String),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_PROJECT",
+                                       description: "Google Cloud Storage project identifier",
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :keyfile,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_KEYFILE",
-                               description: "Google Cloud Storage keyfile",
-                                  optional: false,
-                                      type: String,
-                              verify_block: proc do |value|
-                                              if value.nil? || value.empty?
-                                                UI.user_error!("No keyfile for Google Cloud Storage action given, pass using `keyfile_path: 'path/to/file.txt'`")
-                                              elsif File.file?(value) == false
-                                                UI.user_error!("Keyfile '#{value}' not found")
-                                              end
-                                            end),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_KEYFILE",
+                                       description: "Google Cloud Storage keyfile",
+                                       optional: false,
+                                       type: String,
+                                       verify_block: proc do |value|
+                                         if value.nil? || value.empty?
+                                           UI.user_error!("No keyfile for Google Cloud Storage action
+                                                                        given, pass using `keyfile_path:
+                                                                        'path/to/file.txt'`")
+                                         elsif !File.file?(value)
+                                           UI.user_error!("Keyfile '#{value}' not found")
+                                         end
+                                       end),
           FastlaneCore::ConfigItem.new(key: :bucket,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_BUCKET",
-                               description: "Google Cloud Storage bucket",
-                                  optional: false,
-                                      type: String),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_BUCKET",
+                                       description: "Google Cloud Storage bucket",
+                                       optional: false,
+                                       type: String),
           FastlaneCore::ConfigItem.new(key: :content_path,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_UPLOAD_CONTENT_PATH",
-                               description: "Path for file to upload",
-                                  optional: false,
-                                      type: String,
-                              verify_block: proc do |value|
-                                              if value.nil? || value.empty?
-                                                UI.user_error!("No content path for google_cloud_storage_upload action given, pass using `content_path: 'path/to/file.txt'`")
-                                              elsif File.file?(value) == false
-                                                UI.user_error!("File for path '#{value}' not found")
-                                              end
-                                            end),
+                                       env_name: "GOOGLE_CLOUD_STORAGE_UPLOAD_CONTENT_PATH",
+                                       description: "Path for file to upload",
+                                       optional: false,
+                                       type: String,
+                                       verify_block: proc do |value|
+                                         if value.nil? || value.empty?
+                                           UI.user_error!("No content path for google_cloud_storage_upload
+                                                                         action given, pass using `content_path:
+                                                                        'path/to/file.txt'`")
+                                         elsif !File.file?(value)
+                                           UI.user_error!("File for path '#{value}' not found")
+                                         end
+                                       end),
           FastlaneCore::ConfigItem.new(key: :name,
-                                  env_name: "GOOGLE_CLOUD_STORAGE_UPLOAD_NAME",
-                               description: "File name",
-                                  optional: true,
-                                      type: String)
+                                       env_name: "GOOGLE_CLOUD_STORAGE_UPLOAD_NAME",
+                                       description: "File name",
+                                       optional: true,
+                                       type: String)
         ]
       end
 
-      def self.is_supported?(platform)
-        true
-      end
+      # def self.supported?(platform)
+      #   true
+      # end
     end
   end
 end

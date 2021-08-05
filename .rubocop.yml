@@ -1,203 +1,197 @@
-# kind_of? is a good way to check a type
-Style/ClassCheck:
-  EnforcedStyle: kind_of?
-
-# .length == 0 is also good, we don't always want .zero?
-Style/NumericPredicate:
-  Enabled: false
-
-# this would cause errors with long lanes
-Metrics/BlockLength:
-  Enabled: false
-
-# certificate_1 is an okay variable name
-Style/VariableNumber:
-  Enabled: false
-
-# This is used a lot across the fastlane code base for config files
-Style/MethodMissing:
-  Enabled: false
-
-Style/FileName:
-  Enabled: false
-
-Security/Eval:
-  Enabled: false
-
-#
-#   File.chmod(0777, f)
-#
-# is easier to read than
-#
-#   File.chmod(0o777, f)
-#
-Style/NumericLiteralPrefix:
-  Enabled: false
-
-#
-# command = (!clean_expired.nil? || !clean_pattern.nil?) ? CLEANUP : LIST
-#
-# is easier to read than
-#
-# command = !clean_expired.nil? || !clean_pattern.nil? ? CLEANUP : LIST
-#
-Style/TernaryParentheses:
-  Enabled: false
-
-# It's better to be more explicit about the type
-Style/BracesAroundHashParameters:
-  Enabled: false
-
-# specs sometimes have useless assignments, which is fine
-Lint/UselessAssignment:
-  Exclude:
-    - '**/spec/**/*'
-
-# We could potentially enable the 2 below:
-Style/IndentHash:
-  Enabled: false
-
-Style/AlignHash:
-  Enabled: false
-
-# HoundCI doesn't like this rule
-Style/DotPosition:
-  Enabled: false
-
-# We allow !! as it's an easy way to convert ot boolean
-Style/DoubleNegation:
-  Enabled: false
-
-# Sometimes we allow a rescue block that doesn't contain code
-Lint/HandleExceptions:
-  Enabled: false
-
-# Cop supports --auto-correct.
-Lint/UnusedBlockArgument:
-  Enabled: false
-
-# Needed for $verbose
-Style/GlobalVars:
-  Enabled: false
-
-# We want to allow class Fastlane::Class
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-# $? Exit
-Style/SpecialGlobalVars:
-  Enabled: false
-
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/CyclomaticComplexity:
-  Enabled: false
-
-# The %w might be confusing for new users
-Style/WordArray:
-  MinSize: 19
-
-# raise and fail are both okay
-Style/SignalException:
-  Enabled: false
-
-# Better too much 'return' than one missing
-Style/RedundantReturn:
-  Enabled: false
-
-# Having if in the same line might not always be good
-Style/IfUnlessModifier:
-  Enabled: false
-
-# and and or is okay
-Style/AndOr:
-  Enabled: false
-
-# Configuration parameters: CountComments.
-Metrics/ClassLength:
-  Max: 320
-
-
-# Configuration parameters: AllowURI, URISchemes.
-Metrics/LineLength:
-  Max: 370
-
-# Configuration parameters: CountKeywordArgs.
-Metrics/ParameterLists:
-  Max: 17
-
-Metrics/PerceivedComplexity:
-  Max: 18
-
-# Sometimes it's easier to read without guards
-Style/GuardClause:
-  Enabled: false
-
-# We allow both " and '
-Style/StringLiterals:
-  Enabled: false
-
-# something = if something_else
-# that's confusing
-Style/ConditionalAssignment:
-  Enabled: false
-
-# Better to have too much self than missing a self
-Style/RedundantSelf:
-  Enabled: false
-
-# e.g.
-# def self.is_supported?(platform)
-# we may never use `platform`
-Lint/UnusedMethodArgument:
-  Enabled: false
-
-# the let(:key) { ... }
-Lint/ParenthesesAsGroupedExpression:
-  Exclude:
-    - '**/spec/**/*'
-
-# This would reject is_ in front of methods
-# We use `is_supported?` everywhere already
-Style/PredicateName:
-  Enabled: false
-
-# We allow the $
-Style/PerlBackrefs:
-  Enabled: false
-
-# Disable '+ should be surrounded with a single space' for xcodebuild_spec.rb
-Style/SpaceAroundOperators:
-  Exclude:
-    - '**/spec/actions_specs/xcodebuild_spec.rb'
-
+# Generic configuration
 AllCops:
   Include:
     - '**/fastlane/Fastfile'
+    - '**/lib/fastlane/plugin/google_cloud_storage.rb'
+    - '**/lib/fastlane/plugin/google_cloud_storage/version.rb'
+    - '**/lib/fastlane/plugin/google_cloud_storage/actions/*'
+    - '**/lib/fastlane/plugin/google_cloud_storage/helper/*'
+#  Exclude:
+#    - '**/lib/assets/custom_action_template.rb'
+#    - './vendor/**/*'
+require:
+  - rubocop-rake
+  - rubocop-rspec
+
+# Gemspec checks
+Gemspec/DateAssignment: # (new in 1.10)
+  Enabled: true
+
+# Layout checks
+Layout/DotPosition: # HoundCI doesn't like this rule
+  Enabled: true
+Layout/LineEndStringConcatenationIndentation: # (new in 1.18)
+  Enabled: true
+Layout/LineLength: # Configuration parameters: AllowURI, URISchemes.
+  Max: 370
+Layout/SpaceBeforeBrackets: # (new in 1.7)
+  Enabled: true
+
+# Lint checks
+Lint/AmbiguousAssignment: # (new in 1.7)
+  Enabled: true
+Lint/DeprecatedConstants: # (new in 1.8)
+  Enabled: true
+Lint/DuplicateBranch: # (new in 1.3)
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement: # (new in 1.1)
+  Enabled: true
+Lint/EmptyBlock: # (new in 1.1)
+  Enabled: true
+Lint/EmptyClass: # (new in 1.3)
+  Enabled: true
+Lint/EmptyInPattern: # (new in 1.16)
+  Enabled: true
+Lint/LambdaWithoutLiteralBlock: # (new in 1.8)
+  Enabled: true
+Lint/MissingSuper: # This is used a lot across the fastlane code base for config files
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks: # (new in 1.2)
+  Enabled: true
+Lint/NumberedParameterAssignment: # (new in 1.9)
+  Enabled: true
+Lint/OrAssignmentToConstant: # (new in 1.9)
+  Enabled: true
+Lint/ParenthesesAsGroupedExpression: # the let(:key) { ... }
   Exclude:
-    - '**/lib/assets/custom_action_template.rb'
-    - './vendor/**/*'
+    - '**/spec/**/*'
+Lint/RedundantDirGlobSort: # (new in 1.8)
+  Enabled: true
+Lint/SymbolConversion: # (new in 1.9)
+  Enabled: true
+Lint/ToEnumArguments: # (new in 1.1)
+  Enabled: true
+Lint/TripleQuotes: # (new in 1.9)
+  Enabled: true
+Lint/UnexpectedBlockArity: # (new in 1.5)
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator: # (new in 1.1)
+  Enabled: true
+Lint/UselessAssignment: # specs sometimes have useless assignments, which is fine
+  Exclude:
+    - '**/spec/**/*'
+Layout/SpaceAroundOperators: # Disable '+ should be surrounded with a single space' for xcodebuild_spec.rb
+  Exclude:
+    - '**/spec/actions_specs/xcodebuild_spec.rb'
+Lint/SuppressedException: # Sometimes we allow a rescue block that doesn't contain code
+  Enabled: true
+Lint/UnusedBlockArgument: # Cop supports --auto-correct.
+  Enabled: true
+Lint/UnusedMethodArgument: # e.g. def self.is_supported?(platform) we may never use `platform`
+  Enabled: true
 
-# We're not there yet
-Style/Documentation:
+# Metrics checks
+Metrics/AbcSize:
   Enabled: false
-
-# Added after upgrade to 0.38.0
-Style/MutableConstant:
+Metrics/BlockLength: # this would cause errors with long lanes
   Enabled: false
-
-# length > 0 is good
-Style/ZeroLengthPredicate:
+Metrics/ClassLength: # Configuration parameters: CountComments.
+  Max: 320
+Metrics/CyclomaticComplexity:
+  Enabled: true
+Metrics/MethodLength:
   Enabled: false
+Metrics/ParameterLists: # Configuration parameters: CountKeywordArgs.
+  Max: 17
+Metrics/PerceivedComplexity:
+  Max: 18
 
-# Adds complexity
-Style/IfInsideElse:
+# Naming checks
+Naming/FileName: #
+  Enabled: true
+Naming/InclusiveLanguage: # (new in 1.18)
+  Enabled: true
+Naming/PredicateName: # This would reject is_ in front of methods. We use `is_supported?` everywhere already
+  Enabled: true
+Naming/VariableNumber: # certificate_1 is an okay variable name
+  Enabled: true
+
+# RSpec checks
+RSpec/IdenticalEqualityAssertion: # (new in 2.4)
+  Enabled: true
+RSpec/Rails/AvoidSetupHook: # (new in 2.4)
+  Enabled: true
+
+# Security checks
+Security/Eval:
+  Enabled: true
+
+# Style checks
+Style/AndOr: # and and or is okay
   Enabled: false
-
-# Sometimes we just want to 'collect'
-Style/CollectionMethods:
+Style/ArgumentsForwarding: # (new in 1.1)
+  Enabled: true
+Style/ClassCheck: # kind_of? is a good way to check a type
+  EnforcedStyle: kind_of?
+Style/CollectionCompact: # (new in 1.2)
+  Enabled: true
+Style/ClassAndModuleChildren: # We want to allow class Fastlane::Class
+  Enabled: false
+Style/CollectionMethods: # Sometimes we just want to 'collect'
+  Enabled: false
+Style/ConditionalAssignment: # something = if something_else that's confusing
+  Enabled: false
+Style/Documentation: # We're not there yet
+  Enabled: true
+Style/DocumentDynamicEvalDefinition: # (new in 1.1)
+  Enabled: true
+Style/DoubleNegation: # We allow !! as it's an easy way to convert to boolean
+  Enabled: false
+Style/EndlessMethod: # (new in 1.8)
+  Enabled: true
+Style/GlobalVars: # Needed for $verbose
+  Enabled: false
+Style/GuardClause: # Sometimes it's easier to read without guards
+  Enabled: false
+Style/HashConversion: # (new in 1.10)
+  Enabled: true
+Style/HashExcept: # (new in 1.7)
+  Enabled: true
+Style/IfInsideElse: # Adds complexity
+  Enabled: false
+Style/IfUnlessModifier: # Having if in the same line might not always be good
+  Enabled: false
+Style/IfWithBooleanLiteralBranches: # (new in 1.9)
+  Enabled: true
+Style/InPatternThen: # (new in 1.16)
+  Enabled: true
+Style/MissingRespondToMissing:
+  Enabled: false
+Style/MultilineInPatternThen: # (new in 1.16)
+  Enabled: true
+Style/MutableConstant: # Added after upgrade to 0.38.0
+  Enabled: false
+Style/NegatedIfElseCondition: # (new in 1.2)
+  Enabled: true
+Style/NilLambda: # (new in 1.3)
+  Enabled: true
+Style/NumericLiteralPrefix:
+  Enabled: false
+Style/NumericPredicate: # .length == 0 is also good, we don't always want .zero?
+  Enabled: false
+Style/PerlBackrefs: # We allow the $
+  Enabled: false
+Style/QuotedSymbols: # (new in 1.16)
+  Enabled: true
+Style/RedundantArgument: # (new in 1.4)
+  Enabled: true
+Style/RedundantReturn: # Better too much 'return' than one missing
+  Enabled: false
+Style/RedundantSelf: # Better to have too much self than missing a self
+  Enabled: false
+Style/SignalException: # raise and fail are both okay
+  Enabled: false
+Style/SpecialGlobalVars: # $? Exit
+  Enabled: false
+Style/StringChars: # (new in 1.12)
+  Enabled: true
+Style/StringLiterals: # We allow both " and '
+  Enabled: false
+Style/SwapValues: # (new in 1.1)
+  Enabled: true
+Style/TernaryParentheses:
+  Enabled: false
+Style/WordArray: # The %w might be confusing for new users
+  MinSize: 19
+Style/ZeroLengthPredicate: # length > 0 is good
   Enabled: false

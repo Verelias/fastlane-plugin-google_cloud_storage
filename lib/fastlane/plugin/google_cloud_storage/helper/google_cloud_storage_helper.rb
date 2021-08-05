@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 require 'google/cloud/storage'
 
 module Fastlane
   module Helper
+    # Google cloud storage helper class handling the setup of the storage
     class GoogleCloudStorageHelper
       def self.setup_storage(project: nil, keyfile: nil)
         Google::Cloud::Storage.new(
           project: project,
           keyfile: keyfile
         )
-      rescue
+      rescue StandardError
         UI.user_error! "Invalid Google Cloud Storage credentials 🚫"
       end
 

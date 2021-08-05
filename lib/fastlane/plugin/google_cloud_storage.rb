@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'fastlane/plugin/google_cloud_storage/version'
 
 module Fastlane
+  # Module for integrating with google_cloud_storage
   module GoogleCloudStorage
     # Return all .rb files inside the "actions" and "helper" directory
     def self.all_classes

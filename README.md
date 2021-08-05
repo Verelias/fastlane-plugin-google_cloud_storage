@@ -1,6 +1,9 @@
 # google_cloud_storage plugin
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-google_cloud_storage)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rubystyle.guide)
+
 [![Twitter: @fsaragoca](https://img.shields.io/badge/contact-@fsaragoca-blue.svg?style=flat)](https://twitter.com/fsaragoca)
 
 [![CircleCI](https://circleci.com/gh/fsaragoca/fastlane-plugin-google_cloud_storage.svg?style=svg)](https://circleci.com/gh/fsaragoca/fastlane-plugin-google_cloud_storage)

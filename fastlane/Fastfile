@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 lane :test do |options|
   project = options[:project] || UI.input('Please enter Google Cloud Storage project: ')
   keyfile = options[:keyfile] || UI.input('Please enter Google Cloud Storage keyfile: ')
