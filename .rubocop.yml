@@ -2,10 +2,10 @@
 AllCops:
   Include:
     - '**/fastlane/Fastfile'
-    - '**/lib/fastlane/plugin/google_cloud_storage.rb'
-    - '**/lib/fastlane/plugin/google_cloud_storage/version.rb'
-    - '**/lib/fastlane/plugin/google_cloud_storage/actions/*'
-    - '**/lib/fastlane/plugin/google_cloud_storage/helper/*'
+    - '**/lib/fastlane/plugin/google_cloud_storage_update.rb'
+    - '**/lib/fastlane/plugin/google_cloud_storage_update/version.rb'
+    - '**/lib/fastlane/plugin/google_cloud_storage_update/actions/*'
+    - '**/lib/fastlane/plugin/google_cloud_storage_update/helper/*'
 #  Exclude:
 #    - '**/lib/assets/custom_action_template.rb'
 #    - './vendor/**/*'

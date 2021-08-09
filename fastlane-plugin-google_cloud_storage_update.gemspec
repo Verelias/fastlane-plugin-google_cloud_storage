@@ -2,16 +2,16 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'fastlane/plugin/google_cloud_storage/version'
+require 'fastlane/plugin/google_cloud_storage_update/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'fastlane-plugin-google_cloud_storage'
-  spec.version       = Fastlane::GoogleCloudStorage::VERSION
-  spec.author        = 'Fernando Saragoca'
-  spec.email         = 'fsaragoca@me.com'
+  spec.name          = 'fastlane-plugin-google_cloud_storage_update'
+  spec.version       = Fastlane::GoogleCloudStorageUpdate::VERSION
+  spec.author        = 'Jeroen Stoker'
+  spec.email         = 'verelias@gmail.com'
 
   spec.summary       = 'Google Cloud Storage'
-  spec.homepage      = "https://github.com/fsaragoca/fastlane-plugin-google_cloud_storage"
+  spec.homepage      = "https://github.com/verelias/fastlane-plugin-google_cloud_storage_update"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w[README.md LICENSE]

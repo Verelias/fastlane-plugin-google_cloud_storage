@@ -13,7 +13,7 @@
 This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-google_cloud_storage`, add it to your project by running:
 
 ```bash
-fastlane add_plugin google_cloud_storage
+fastlane add_plugin google_cloud_storage_update
 ```
 
 ## About google_cloud_storage
