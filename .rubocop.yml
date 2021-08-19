@@ -102,7 +102,7 @@ Naming/FileName: #
 Naming/InclusiveLanguage: # (new in 1.18)
   Enabled: true
 Naming/PredicateName: # This would reject is_ in front of methods. We use `is_supported?` everywhere already
-  Enabled: true
+  Enabled: false
 Naming/VariableNumber: # certificate_1 is an okay variable name
   Enabled: true
 
