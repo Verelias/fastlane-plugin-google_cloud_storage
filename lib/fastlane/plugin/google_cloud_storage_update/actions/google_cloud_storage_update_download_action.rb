@@ -82,9 +82,9 @@ module Fastlane
         ]
       end
 
-      # def self.supported?(platform)
-      #   true
-      # end
+      def self.is_supported?(platform)
+        true
+      end
     end
   end
 end
