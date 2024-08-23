@@ -9,12 +9,14 @@ AllCops:
 #  Exclude:
 #    - '**/lib/assets/custom_action_template.rb'
 #    - './vendor/**/*'
+  NewCops: enable
+
 require:
   - rubocop-rake
   - rubocop-rspec
 
 # Gemspec checks
-Gemspec/DateAssignment: # (new in 1.10)
+Gemspec/DeprecatedAttributeAssignment: # (new in 1.10)
   Enabled: true
 
 # Layout checks
@@ -108,8 +110,6 @@ Naming/VariableNumber: # certificate_1 is an okay variable name
 
 # RSpec checks
 RSpec/IdenticalEqualityAssertion: # (new in 2.4)
-  Enabled: true
-RSpec/Rails/AvoidSetupHook: # (new in 2.4)
   Enabled: true
 
 # Security checks
